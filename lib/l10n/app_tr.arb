@@ -1,5 +1,21 @@
 {
+<<<<<<< HEAD
     "appTitle": "Atomik Spor",
     "counterDescription": "Butona bu kadar kez bastın:",
     "incrementTooltip": "Artır"
 }
+=======
+  "appTitle": "Atomik Spor",
+  "counterDescription": "Butona bastıkça sayaç artar.",
+  "counterLabel": "Mevcut değer: {count}",
+  "@counterLabel": {
+    "description": "Sayaçta görünen mevcut değeri bildiren metin.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "incrementTooltip": "Sayaç artır"
+}
+>>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
