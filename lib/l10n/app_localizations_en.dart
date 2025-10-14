@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// ignore: unused_import
-=======
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
@@ -12,16 +8,6 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-<<<<<<< HEAD
-  String get appTitle => 'Atomic Sports';
-
-  @override
-  String get counterDescription =>
-      'You have pushed the button this many times:';
-
-  @override
-  String get incrementTooltip => 'Increment';
-=======
   String get appTitle => 'Atomik Spor';
 
   @override
@@ -36,5 +22,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get incrementTooltip => 'Increment counter';
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
 }

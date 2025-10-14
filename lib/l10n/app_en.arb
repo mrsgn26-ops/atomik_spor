@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-    "appTitle": "Atomic Sports",
-    "counterDescription": "You have pushed the button this many times:",
-    "incrementTooltip": "Increment"
-}
-=======
   "appTitle": "Atomik Spor",
   "counterDescription": "Tap the button to increase the counter.",
   "counterLabel": "Current count: {count}",
@@ -18,4 +12,3 @@
   },
   "incrementTooltip": "Increment counter"
 }
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
