@@ -10,4 +10,10 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get appTitle => 'Atomik Spor';
+
+  @override
+  String get counterDescription => 'Butona bu kadar kez bastın:';
+
+  @override
+  String get incrementTooltip => 'Artır';
 }

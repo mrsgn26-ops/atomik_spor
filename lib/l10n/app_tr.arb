@@ -1,3 +1,5 @@
 {
-  "appTitle": "Atomik Spor"
+    "appTitle": "Atomik Spor",
+    "counterDescription": "Butona bu kadar kez bastın:",
+    "incrementTooltip": "Artır"
 }
