@@ -12,7 +12,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: ^0.20.2 # Bu versiyonu doğru tutalım, daha önce düzeltmiştik
+  cupertino_icons: ^1.0.2 # İşte eksik olan standart ikon paketi
+  table_calendar: ^3.0.9 # Ve yeni takvim paketimiz
 
 flutter:
   generate: true

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:atomik_spor/l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
+import 'habit_tracker_screen.dart'; // YENİ EKRANIMIZI BURAYA DAHİL EDİYORUZ
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Sağ üstteki "DEBUG" etiketini kaldırır
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
@@ -25,52 +25,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(localizations.appTitle),
+        title: Text(AppLocalizations.of(context)!.appTitle),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              localizations.counterDescription,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              localizations.counterLabel(_counter),
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-          ],
+        // Artık ortada bir butonumuz var
+        child: ElevatedButton(
+          child: const Text('Takvimimi Göster'),
+          onPressed: () {
+            // Butona basıldığında yapılacak eylem:
+            // Yeni takvim ekranına git.
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HabitTrackerScreen()),
+            );
+          },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: localizations.incrementTooltip,
-        child: const Icon(Icons.add),
       ),
     );
   }

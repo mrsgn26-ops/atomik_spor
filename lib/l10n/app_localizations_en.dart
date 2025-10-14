@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
@@ -15,9 +16,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String counterLabel(int count) {
-    final countString =
-        intl.NumberFormat.decimalPattern(localeName).format(count);
-    return 'Current count: $countString';
+    return 'Current count: $count';
   }
 
   @override

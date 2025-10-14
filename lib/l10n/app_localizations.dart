@@ -95,15 +95,12 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('tr'),
+    Locale('tr')
   ];
 
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Atomik Spor'**
-  ///
-  /// In tr, this message translates to:
   /// **'Atomik Spor'**
   String get appTitle;
 
@@ -111,27 +108,18 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Tap the button to increase the counter.'**
-  ///
-  /// In tr, this message translates to:
-  /// **'Butona bastıkça sayaç artar.'**
   String get counterDescription;
 
-  /// No description provided for @counterLabel.
+  /// Label that shows the current counter value.
   ///
   /// In en, this message translates to:
   /// **'Current count: {count}'**
-  ///
-  /// In tr, this message translates to:
-  /// **'Mevcut değer: {count}'**
   String counterLabel(int count);
 
   /// No description provided for @incrementTooltip.
   ///
   /// In en, this message translates to:
   /// **'Increment counter'**
-  ///
-  /// In tr, this message translates to:
-  /// **'Sayaç artır'**
   String get incrementTooltip;
 }
 
