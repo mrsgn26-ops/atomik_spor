@@ -1,0 +1,14 @@
+{
+  "appTitle": "Atomik Spor",
+  "counterDescription": "Tap the button to increase the counter.",
+  "counterLabel": "Current count: {count}",
+  "@counterLabel": {
+    "description": "Label that shows the current counter value.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "incrementTooltip": "Increment counter"
+}
