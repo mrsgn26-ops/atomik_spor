@@ -1,14 +1,5 @@
 {
   "appTitle": "Atomik Spor",
-  "counterDescription": "Butona bastıkça sayaç artar.",
-  "counterLabel": "Mevcut değer: {count}",
-  "@counterLabel": {
-    "description": "Sayaçta görünen mevcut değeri bildiren metin.",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "incrementTooltip": "Sayaç artır"
+  "showCalendarButton": "Takvimimi Göster",
+  "habitTrackerTitle": "Alışkanlık Takvimi"
 }

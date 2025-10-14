@@ -12,13 +12,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Atomik Spor';
 
   @override
-  String get counterDescription => 'Tap the button to increase the counter.';
+  String get showCalendarButton => 'Show My Calendar';
 
   @override
-  String counterLabel(int count) {
-    return 'Current count: $count';
-  }
-
-  @override
-  String get incrementTooltip => 'Increment counter';
+  String get habitTrackerTitle => 'Habit Calendar';
 }

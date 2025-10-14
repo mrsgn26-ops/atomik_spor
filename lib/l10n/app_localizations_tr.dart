@@ -12,13 +12,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appTitle => 'Atomik Spor';
 
   @override
-  String get counterDescription => 'Butona bastıkça sayaç artar.';
+  String get showCalendarButton => 'Takvimimi Göster';
 
   @override
-  String counterLabel(int count) {
-    return 'Mevcut değer: $count';
-  }
-
-  @override
-  String get incrementTooltip => 'Sayaç artır';
+  String get habitTrackerTitle => 'Alışkanlık Takvimi';
 }
