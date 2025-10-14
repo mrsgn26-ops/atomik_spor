@@ -1,20 +1,25 @@
 name: atomik_spor
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: '>=3.2.2 <4.0.0'
-
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2 # Bu versiyonu doğru tutalım, daha önce düzeltmiştik
-  cupertino_icons: ^1.0.2 # İşte eksik olan standart ikon paketi
-  table_calendar: ^3.0.9 # Ve yeni takvim paketimiz
+  intl: ^0.20.2
+  cupertino_icons: ^1.0.2
+  table_calendar: ^3.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
 
 flutter:
+  uses-material-design: true
   generate: true

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'habit_tracker_screen.dart';
 import 'l10n/app_localizations.dart';
-import 'habit_tracker_screen.dart'; // YENİ EKRANIMIZI BURAYA DAHİL EDİYORUZ
 
 void main() {
   runApp(const MyApp());
@@ -30,22 +31,24 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
+        title: Text(localizations.appTitle),
       ),
       body: Center(
-        // Artık ortada bir butonumuz var
         child: ElevatedButton(
-          child: const Text('Takvimimi Göster'),
+          key: const Key('showCalendarButton'),
           onPressed: () {
-            // Butona basıldığında yapılacak eylem:
-            // Yeni takvim ekranına git.
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const HabitTrackerScreen()),
+              MaterialPageRoute(
+                builder: (context) => const HabitTrackerScreen(),
+              ),
             );
           },
+          child: Text(localizations.showCalendarButton),
         ),
       ),
     );
