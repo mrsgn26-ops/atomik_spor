@@ -93,40 +93,23 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-<<<<<<< HEAD
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('tr')
+    Locale('tr'),
   ];
-=======
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('tr')];
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
 
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-<<<<<<< HEAD
-  /// **'Atomic Sports'**
-=======
   /// **'Atomik Spor'**
   ///
   /// In tr, this message translates to:
   /// **'Atomik Spor'**
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
   String get appTitle;
 
   /// No description provided for @counterDescription.
   ///
   /// In en, this message translates to:
-<<<<<<< HEAD
-  /// **'You have pushed the button this many times:'**
-  String get counterDescription;
-
-  /// No description provided for @incrementTooltip.
-  ///
-  /// In en, this message translates to:
-  /// **'Increment'**
-=======
   /// **'Tap the button to increase the counter.'**
   ///
   /// In tr, this message translates to:
@@ -149,7 +132,6 @@ abstract class AppLocalizations {
   ///
   /// In tr, this message translates to:
   /// **'Sayaç artır'**
->>>>>>> 20e8b8e1f85acd5d59510a9545a6cc9a53118d4d
   String get incrementTooltip;
 }
 
