@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:atomik_spor/l10n/app_localizations.dart';
 
 class HabitTrackerScreen extends StatefulWidget {
   const HabitTrackerScreen({super.key});
