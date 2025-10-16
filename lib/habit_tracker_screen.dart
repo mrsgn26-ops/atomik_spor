@@ -3,6 +3,11 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'package:atomik_spor/l10n/app_localizations.dart';
+import 'package:atomik_spor/ui/widgets/chain_day.dart';
+
+import 'package:atomik_spor/data/session_repo.dart';
+import 'package:atomik_spor/domain/streak.dart';
+import 'package:atomik_spor/logic/streak_service.dart';
 
 class HabitTrackerScreen extends StatefulWidget {
   const HabitTrackerScreen({super.key});
@@ -20,6 +25,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
 
   final Map<DateTime, Set<String>> _completedHabits = <DateTime, Set<String>>{};
 
+  final _service = StreakService(SessionRepo());
   CalendarFormat _calendarFormat = CalendarFormat.month;
   late DateTime _focusedDay;
   DateTime? _selectedDay;
@@ -50,6 +56,12 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
         if (completedForDay.isEmpty) {
           _completedHabits.remove(dayKey);
         }
+      }
+
+      if (completedForDay.length == _habitIds.length) {
+        _service.repo.markCompleted(dayKey);
+      } else {
+        _service.repo.unmark(dayKey);
       }
     });
   }
@@ -91,6 +103,33 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
         ? '${localizations.habitListTitle} · $formattedDate'
         : localizations.habitListTitle;
 
+    final month = DateTime(_focusedDay.year, _focusedDay.month);
+    final firstDayOfMonth = DateTime(month.year, month.month, 1);
+    int startOffset = firstDayOfMonth.weekday - DateTime.monday;
+    if (startOffset < 0) startOffset += 7;
+    final firstVisible = firstDayOfMonth.subtract(Duration(days: startOffset));
+    final lastDayOfMonth = DateTime(month.year, month.month + 1, 0);
+    int endOffset = DateTime.sunday - lastDayOfMonth.weekday;
+    if (endOffset < 0) endOffset += 7;
+    final lastVisible = lastDayOfMonth.add(Duration(days: endOffset));
+
+    final completedDays =
+        _service.repo.allCompleted().map(DateUtils.dateOnly).toSet();
+    final visuals = buildMonthVisuals(
+      completedDays,
+      firstDay: firstVisible,
+      lastDay: lastVisible,
+      month: month,
+      today: DateTime.now(),
+    );
+    Widget buildCell(DateTime day) {
+      final visual = visuals[DateUtils.dateOnly(day)];
+      if (visual == null) {
+        return const SizedBox.shrink();
+      }
+      return ChainDay(v: visual);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.habitTrackerTitle),
@@ -99,8 +138,8 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
         children: [
           TableCalendar(
             locale: calendarLocale,
-            firstDay: DateTime.utc(2024, 1, 1),
-            lastDay: DateTime.utc(2030, 12, 31),
+            firstDay: DateTime.utc(2020, 1, 1),
+            lastDay: DateTime.utc(2100, 12, 31),
             focusedDay: _focusedDay,
             calendarFormat: _calendarFormat,
             startingDayOfWeek: StartingDayOfWeek.monday,
@@ -127,6 +166,15 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                 _focusedDay = DateUtils.dateOnly(focusedDay);
               });
             },
+            calendarBuilders: CalendarBuilders(
+              defaultBuilder: (context, day, focusedDay) => buildCell(day),
+              outsideBuilder: (context, day, focusedDay) => buildCell(day),
+              todayBuilder: (context, day, focusedDay) => buildCell(day),
+              selectedBuilder: (context, day, focusedDay) => buildCell(day),
+            ),
+            calendarStyle: const CalendarStyle(
+              cellMargin: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
+            ),
           ),
           const SizedBox(height: 16),
           Padding(
