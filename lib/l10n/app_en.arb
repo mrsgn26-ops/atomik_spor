@@ -1,5 +1,21 @@
 {
   "appTitle": "Atomik Spor",
   "showCalendarButton": "Show My Calendar",
-  "habitTrackerTitle": "Habit Calendar"
+  "habitTrackerTitle": "Habit Calendar",
+  "habitListTitle": "Daily Habits",
+  "habitCompletionSummary": "{completed} of {total} habits completed",
+  "@habitCompletionSummary": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "habitInstructions": "Tap a habit to mark it as done.",
+  "habitMorningStretch": "Morning stretch",
+  "habitReading": "Read for 10 minutes",
+  "habitHydrate": "Drink a glass of water"
 }

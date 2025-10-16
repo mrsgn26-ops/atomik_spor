@@ -16,4 +16,25 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get habitTrackerTitle => 'Alışkanlık Takvimi';
+
+  @override
+  String get habitListTitle => 'Günlük Alışkanlıklar';
+
+  @override
+  String habitCompletionSummary(int completed, int total) {
+    return '$total alışkanlığın $completed tanesi tamamlandı';
+  }
+
+  @override
+  String get habitInstructions =>
+      'Bir alışkanlığı tamamlandı olarak işaretlemek için üzerine dokunun.';
+
+  @override
+  String get habitMorningStretch => 'Sabah esnemesi';
+
+  @override
+  String get habitReading => '10 dakika oku';
+
+  @override
+  String get habitHydrate => 'Bir bardak su iç';
 }

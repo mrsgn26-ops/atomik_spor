@@ -16,4 +16,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get habitTrackerTitle => 'Habit Calendar';
+
+  @override
+  String get habitListTitle => 'Daily Habits';
+
+  @override
+  String habitCompletionSummary(int completed, int total) {
+    return '$completed of $total habits completed';
+  }
+
+  @override
+  String get habitInstructions => 'Tap a habit to mark it as done.';
+
+  @override
+  String get habitMorningStretch => 'Morning stretch';
+
+  @override
+  String get habitReading => 'Read for 10 minutes';
+
+  @override
+  String get habitHydrate => 'Drink a glass of water';
 }
