@@ -1,43 +1,159 @@
 import 'datex.dart';
-final days = completed.map(DateX.normalize).toList()..sort();
-var best = 1;
-var cur = 1;
-for (var i = 1; i < days.length; i++) {
-final diff = days[i].difference(days[i - 1]).inDays;
-if (diff == 1) {
-cur += 1;
-} else {
-if (cur > best) best = cur;
-cur = 1;
-}
-}
-if (cur > best) best = cur;
-return best;
-}
 
+class StreakCounts {
+  final int currentGrace;
+  final int bestGrace;
+  final int currentPerfect;
+  final int bestPerfect;
+
+  const StreakCounts({
+    required this.currentGrace,
+    required this.bestGrace,
+    required this.currentPerfect,
+    required this.bestPerfect,
+  });
+}
 
 StreakCounts computeStreakCounts(Set<DateTime> completed, DateTime today) {
-final cg = computeCurrentGrace(completed, today);
-final cp = computeCurrentPerfect(completed, today);
-final bg = computeBestGrace(completed);
-final bp = computeBestPerfect(completed);
-return StreakCounts(
-currentGrace: cg,
-bestGrace: bg,
-currentPerfect: cp,
-bestPerfect: bp,
-);
+  final normalized = _normalizeSet(completed);
+  return StreakCounts(
+    currentGrace: _computeCurrentGrace(normalized, today),
+    bestGrace: computeBestGrace(normalized),
+    currentPerfect: _computeCurrentPerfect(normalized, today),
+    bestPerfect: computeBestPerfect(normalized),
+  );
 }
 
+int computeCurrentPerfect(Set<DateTime> completed, DateTime today) {
+  if (completed.isEmpty) {
+    return 0;
+  }
+
+  final normalized = _normalizeSet(completed);
+  return _computeCurrentPerfect(normalized, today);
+}
+
+int _computeCurrentPerfect(Set<DateTime> normalized, DateTime today) {
+  final day = _dateOnly(today);
+  var cursor = day;
+  var streak = 0;
+
+  while (normalized.contains(cursor)) {
+    streak += 1;
+    cursor = cursor.subtract(const Duration(days: 1));
+  }
+
+  return streak;
+}
+
+int computeCurrentGrace(Set<DateTime> completed, DateTime today) {
+  if (completed.isEmpty) {
+    return 0;
+  }
+
+  final normalized = _normalizeSet(completed);
+  return _computeCurrentGrace(normalized, today);
+}
+
+int _computeCurrentGrace(Set<DateTime> normalized, DateTime today) {
+  final day = _dateOnly(today);
+  var cursor = day;
+  var streak = 0;
+  var consecutiveMisses = 0;
+
+  while (true) {
+    if (normalized.contains(cursor)) {
+      streak += 1;
+      consecutiveMisses = 0;
+    } else {
+      consecutiveMisses += 1;
+      if (consecutiveMisses > 1) {
+        break;
+      }
+    }
+
+    cursor = cursor.subtract(const Duration(days: 1));
+  }
+
+  return streak;
+}
+
+int computeBestPerfect(Set<DateTime> completed) {
+  final days = _sortedDays(completed);
+  if (days.isEmpty) {
+    return 0;
+  }
+
+  var best = 1;
+  var current = 1;
+
+  for (var i = 1; i < days.length; i++) {
+    final diff = days[i].difference(days[i - 1]).inDays;
+    if (diff == 0) {
+      continue;
+    }
+
+    if (diff == 1) {
+      current += 1;
+    } else {
+      current = 1;
+    }
+
+    if (current > best) {
+      best = current;
+    }
+  }
+
+  return best;
+}
+
+int computeBestGrace(Set<DateTime> completed) {
+  final days = _sortedDays(completed);
+  if (days.isEmpty) {
+    return 0;
+  }
+
+  var best = 1;
+  var current = 1;
+
+  for (var i = 1; i < days.length; i++) {
+    final diff = days[i].difference(days[i - 1]).inDays;
+    if (diff == 0) {
+      continue;
+    }
+
+    if (diff == 1 || diff == 2) {
+      current += 1;
+    } else {
+      current = 1;
+    }
+
+    if (current > best) {
+      best = current;
+    }
+  }
+
+  return best;
+}
+
+List<DateTime> _sortedDays(Set<DateTime> completed) {
+  final list = _normalizeSet(completed).toList();
+  list.sort();
+  return list;
+}
+
+Set<DateTime> _normalizeSet(Set<DateTime> completed) =>
+    completed.map(_dateOnly).toSet();
+
+DateTime _dateOnly(DateTime d) => DateTime(d.year, d.month, d.day);
 
 /// Görselleştirme yardımcıları — ay içindeki "grace" boşluklarını ve bağlantıları bul.
 class ChainVisuals {
-final Set<int> solidLinks; // d→d+1 (ay günü indeks)
-final Set<int> dashedLinks; // d→d+2, aradaki gün boş
-final Set<int> graceHoles; // tek boş gün konumu (ay günü indeks)
-ChainVisuals(this.solidLinks, this.dashedLinks, this.graceHoles);
+  final Set<int> solidLinks; // d→d+1 (ay günü indeks)
+  final Set<int> dashedLinks; // d→d+2, aradaki gün boş
+  final Set<int> graceHoles; // tek boş gün konumu (ay günü indeks)
+  ChainVisuals(this.solidLinks, this.dashedLinks, this.graceHoles);
 }
-
 
 /// Ay içi görselleştirme: day=1..N indeksleri kullanılır.
 ChainVisuals buildLegacyMonthVisuals(
@@ -85,8 +201,6 @@ class DayVisual {
     required this.linkFromLeft,
   });
 }
-
-DateTime _dateOnly(DateTime d) => DateTime(d.year, d.month, d.day);
 
 /// Ay görünümündeki (hafta taşmaları dahil) tüm günler için hücre görsellerini üretir.
 Map<DateTime, DayVisual> buildMonthVisuals(
