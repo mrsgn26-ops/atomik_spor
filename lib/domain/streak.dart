@@ -40,30 +40,99 @@ ChainVisuals(this.solidLinks, this.dashedLinks, this.graceHoles);
 
 
 /// Ay içi görselleştirme: day=1..N indeksleri kullanılır.
-ChainVisuals buildMonthVisuals(Set<DateTime> completed, int year, int month) {
-final daysInMonth = DateTime(year, month + 1, 0).day;
-final done = completed
-.map(DateX.normalize)
-.where((d) => d.year == year && d.month == month)
-.toSet();
+ChainVisuals buildLegacyMonthVisuals(
+  Set<DateTime> completed,
+  int year,
+  int month,
+) {
+  final daysInMonth = DateTime(year, month + 1, 0).day;
+  final done = completed
+      .map(DateX.normalize)
+      .where((d) => d.year == year && d.month == month)
+      .toSet();
 
+  final solid = <int>{};
+  final dashed = <int>{};
+  final holes = <int>{};
 
-final solid = <int>{};
-final dashed = <int>{};
-final holes = <int>{};
+  bool isDone(int d) => done.contains(DateTime(year, month, d));
 
-
-bool isDone(int d) => done.contains(DateTime(year, month, d));
-
-
-for (int d = 1; d <= daysInMonth; d++) {
-if (d < daysInMonth && isDone(d) && isDone(d + 1)) {
-solid.add(d); // d → d+1 solid
+  for (int d = 1; d <= daysInMonth; d++) {
+    if (d < daysInMonth && isDone(d) && isDone(d + 1)) {
+      solid.add(d); // d → d+1 solid
+    }
+    if (d + 2 <= daysInMonth && isDone(d) && !isDone(d + 1) && isDone(d + 2)) {
+      dashed.add(d); // d → d+2 dashed
+      holes.add(d + 1);
+    }
+  }
+  return ChainVisuals(solid, dashed, holes);
 }
-if (d + 2 <= daysInMonth && isDone(d) && !isDone(d + 1) && isDone(d + 2)) {
-dashed.add(d); // d → d+2 dashed
-holes.add(d + 1);
+
+enum ChainLink { none, solid, dashed }
+
+class DayVisual {
+  final DateTime day;
+  final bool inMonth;
+  final bool done;
+  final bool isToday;
+  final ChainLink linkFromLeft; // prev -> this
+  const DayVisual({
+    required this.day,
+    required this.inMonth,
+    required this.done,
+    required this.isToday,
+    required this.linkFromLeft,
+  });
 }
-}
-return ChainVisuals(solid, dashed, holes);
+
+DateTime _dateOnly(DateTime d) => DateTime(d.year, d.month, d.day);
+
+/// Ay görünümündeki (hafta taşmaları dahil) tüm günler için hücre görsellerini üretir.
+Map<DateTime, DayVisual> buildMonthVisuals(
+  Set<DateTime> completed, {
+  required DateTime firstDay, // takvimin sol-üst görünen günü
+  required DateTime lastDay, // takvimin sağ-alt görünen günü
+  required DateTime month, // odaklanan ay (inMonth hesaplamak için)
+  DateTime? today,
+}) {
+  today ??= DateTime.now();
+  final done = completed.map(_dateOnly).toSet();
+
+  final map = <DateTime, DayVisual>{};
+  DateTime d = _dateOnly(firstDay);
+  final end = _dateOnly(lastDay);
+
+  while (!d.isAfter(end)) {
+    final prev = d.subtract(const Duration(days: 1));
+    final next = d.add(const Duration(days: 1));
+
+    final prevDone = done.contains(prev);
+    final curDone = done.contains(d);
+    final nextDone = done.contains(next);
+
+    ChainLink fromLeft = ChainLink.none;
+
+    // Aynı haftadaysa (Pzt–Paz) yatay bağ kur.
+    final sameWeekAsPrev = prev.weekday < d.weekday; // basit hafta kontrolü
+    if (sameWeekAsPrev) {
+      if (prevDone && curDone) {
+        fromLeft = ChainLink.solid;
+      } else if (prevDone && !curDone && nextDone) {
+        // tek gün kaçak köprüsü
+        fromLeft = ChainLink.dashed;
+      }
+    }
+
+    map[d] = DayVisual(
+      day: d,
+      inMonth: d.month == month.month && d.year == month.year,
+      done: curDone,
+      isToday: _dateOnly(today) == d,
+      linkFromLeft: fromLeft,
+    );
+
+    d = d.add(const Duration(days: 1));
+  }
+  return map;
 }
