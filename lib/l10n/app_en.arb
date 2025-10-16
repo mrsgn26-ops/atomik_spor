@@ -17,5 +17,20 @@
   "habitInstructions": "Tap a habit to mark it as done.",
   "habitMorningStretch": "Morning stretch",
   "habitReading": "Read for 10 minutes",
-  "habitHydrate": "Drink a glass of water"
+  "habitHydrate": "Drink a glass of water",
+  "navHome": "Home",
+  "navOnboarding": "Onboarding",
+  "navWorkout": "Workout",
+  "navSettings": "Settings",
+  "headlineSystemNotGoals": "Systems, not goals.",
+  "sub6minStart": "Start today with 6 min",
+  "btnStart": "Start",
+  "btnChangeLang": "Change Language",
+  "labelCurrentStreak": "Current streak",
+  "labelBestStreak": "Best streak",
+  "labelPerfectStreak": "Perfect streak",
+  "onboardingTitle1": "Systems, not goals",
+  "onboardingTitle2": "Choose your trigger",
+  "onboardingTitle3": "Pick a reminder time",
+  "done": "Done"
 }
