@@ -52,6 +52,9 @@ class _MyAppState extends State<MyApp> {
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.onLocaleChanged});
 
+  static const _welcomeImageUrl =
+      'https://picsum.photos/seed/atomikspor/1200/720';
+
   final ValueChanged<Locale?> onLocaleChanged;
 
   void _openHabitTracker(BuildContext context) {
@@ -82,22 +85,39 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(localizations.appTitle),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              key: const Key('showCalendarButton'),
-              onPressed: () => _openHabitTracker(context),
-              child: Text(localizations.btnStart),
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton(
-              key: const Key('changeLanguageButton'),
-              onPressed: () => _openSettings(context),
-              child: Text(localizations.btnChangeLang),
-            ),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Semantics(
+                label: localizations.homeWelcomeIllustrationDescription,
+                image: true,
+                child: ExcludeSemantics(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: Image.network(
+                      _welcomeImageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                key: const Key('showCalendarButton'),
+                onPressed: () => _openHabitTracker(context),
+                child: Text(localizations.btnStart),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton(
+                key: const Key('changeLanguageButton'),
+                onPressed: () => _openSettings(context),
+                child: Text(localizations.btnChangeLang),
+              ),
+            ],
+          ),
         ),
       ),
     );

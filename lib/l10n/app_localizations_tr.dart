@@ -63,6 +63,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get btnChangeLang => 'Dili Değiştir';
 
   @override
+  String get homeWelcomeIllustrationDescription =>
+      'Dört kişinin esneme hareketi yaptığı illüstrasyon';
+
+  @override
   String get labelCurrentStreak => 'Güncel zincir';
 
   @override
