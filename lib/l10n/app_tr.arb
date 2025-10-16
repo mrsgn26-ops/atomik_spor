@@ -1,4 +1,5 @@
 {
+  "@@locale": "tr",
   "appTitle": "Atomik Spor",
   "showCalendarButton": "Takvimimi Göster",
   "habitTrackerTitle": "Alışkanlık Takvimi",
@@ -17,5 +18,20 @@
   "habitInstructions": "Bir alışkanlığı tamamlandı olarak işaretlemek için üzerine dokunun.",
   "habitMorningStretch": "Sabah esnemesi",
   "habitReading": "10 dakika oku",
-  "habitHydrate": "Bir bardak su iç"
+  "habitHydrate": "Bir bardak su iç",
+  "navHome": "Ana Sayfa",
+  "navOnboarding": "Onboarding",
+  "navWorkout": "Antrenman",
+  "navSettings": "Ayarlar",
+  "headlineSystemNotGoals": "Hedef değil, sistem.",
+  "sub6minStart": "Bugün 6 dk ile başla",
+  "btnStart": "Başla",
+  "btnChangeLang": "Dili Değiştir",
+  "labelCurrentStreak": "Güncel zincir",
+  "labelBestStreak": "En uzun zincir",
+  "labelPerfectStreak": "Mükemmel zincir",
+  "onboardingTitle1": "Hedef değil, sistem",
+  "onboardingTitle2": "Tetikleyicini seç",
+  "onboardingTitle3": "Hatırlatma saatini seç",
+  "done": "Bitti"
 }
