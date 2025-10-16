@@ -1,5 +1,21 @@
 {
   "appTitle": "Atomik Spor",
   "showCalendarButton": "Takvimimi Göster",
-  "habitTrackerTitle": "Alışkanlık Takvimi"
+  "habitTrackerTitle": "Alışkanlık Takvimi",
+  "habitListTitle": "Günlük Alışkanlıklar",
+  "habitCompletionSummary": "{total} alışkanlığın {completed} tanesi tamamlandı",
+  "@habitCompletionSummary": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "habitInstructions": "Bir alışkanlığı tamamlandı olarak işaretlemek için üzerine dokunun.",
+  "habitMorningStretch": "Sabah esnemesi",
+  "habitReading": "10 dakika oku",
+  "habitHydrate": "Bir bardak su iç"
 }

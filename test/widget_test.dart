@@ -15,5 +15,16 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Habit Calendar'), findsOneWidget);
+    expect(find.textContaining('Daily Habits'), findsOneWidget);
+    expect(find.text('0 of 3 habits completed'), findsOneWidget);
+
+    final stretchHabitFinder =
+        find.byKey(const Key('habitCheckbox_morningStretch'));
+    expect(stretchHabitFinder, findsOneWidget);
+
+    await tester.tap(stretchHabitFinder);
+    await tester.pumpAndSettle();
+
+    expect(find.text('1 of 3 habits completed'), findsOneWidget);
   });
 }

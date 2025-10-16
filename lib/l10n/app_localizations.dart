@@ -40,6 +40,12 @@ abstract class AppLocalizations {
   String get appTitle;
   String get showCalendarButton;
   String get habitTrackerTitle;
+  String get habitListTitle;
+  String habitCompletionSummary(int completed, int total);
+  String get habitInstructions;
+  String get habitMorningStretch;
+  String get habitReading;
+  String get habitHydrate;
 }
 
 class _AppLocalizationsDelegate
