@@ -2,35 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:atomik_spor/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'habit_tracker_screen.dart';
-import 'settings_page.dart';
 import 'ui/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Locale? _locale;
-
-  void _handleLocaleChanged(Locale? locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: _locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -43,43 +27,16 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(
-        onLocaleChanged: _handleLocaleChanged,
-      ),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.onLocaleChanged});
-
-  final ValueChanged<Locale?> onLocaleChanged;
-
-  void _openHabitTracker(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HabitTrackerScreen(),
-      ),
-    );
-  }
-
-  void _openSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SettingsPage(
-          onLocaleChanged: onLocaleChanged,
-        ),
-      ),
-    );
-  }
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return WelcomeScreen(
-      onStartPressed: () => _openHabitTracker(context),
-      onChangeLanguage: () => _openSettings(context),
-    );
+    return const WelcomeScreen();
   }
 }
