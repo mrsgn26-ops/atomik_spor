@@ -86,10 +86,10 @@ class _WelcomeCard extends StatelessWidget {
                     ),
               ),
               const SizedBox(height: 28),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(28),
-                child: AspectRatio(
-                  aspectRatio: 4 / 3,
+              AspectRatio(
+                aspectRatio: 4 / 3,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(28),
                   child: Image.asset(
                     'assets/images/giris1.jpg',
                     fit: BoxFit.cover,
