@@ -27,16 +27,21 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/giris1',
+      onGenerateRoute: (settings) {
+        if (settings.name == '/giris1' || settings.name == '/') {
+          return MaterialPageRoute<void>(
+            builder: (_) => const WelcomeScreen(),
+            settings: settings,
+          );
+        }
+
+        return MaterialPageRoute<void>(
+          builder: (_) => const WelcomeScreen(),
+          settings: settings,
+        );
+      },
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const WelcomeScreen();
-  }
-}
