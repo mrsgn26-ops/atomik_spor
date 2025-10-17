@@ -33,5 +33,11 @@
   "onboardingTitle1": "Hedef değil, sistem",
   "onboardingTitle2": "Tetikleyicini seç",
   "onboardingTitle3": "Hatırlatma saatini seç",
-  "done": "Bitti"
+  "done": "Bitti",
+  "welcomeBrand": "ATOMİK SPOR",
+  "welcomeWizard": "Kurulum Sihirbazı",
+  "welcomeGreeting": "Hoş geldiniz!",
+  "welcomeTagline": "Hedefleri unut, sistem kur.",
+  "welcomeCta": "Sistemini Kuralım",
+  "welcomeDuration": "6 dk"
 }

@@ -81,4 +81,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get done => 'Done';
+
+  @override
+  String get welcomeBrand => 'ATOMIK SPOR';
+
+  @override
+  String get welcomeWizard => 'Setup wizard';
+
+  @override
+  String get welcomeGreeting => 'Welcome!';
+
+  @override
+  String get welcomeTagline => 'Forget goals, build your system.';
+
+  @override
+  String get welcomeCta => 'Let’s Set Up Your System';
+
+  @override
+  String get welcomeDuration => '6 min';
 }

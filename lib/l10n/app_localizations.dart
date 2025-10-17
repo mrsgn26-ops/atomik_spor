@@ -241,6 +241,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Done'**
   String get done;
+
+  /// No description provided for @welcomeBrand.
+  ///
+  /// In en, this message translates to:
+  /// **'ATOMIK SPOR'**
+  String get welcomeBrand;
+
+  /// No description provided for @welcomeWizard.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup wizard'**
+  String get welcomeWizard;
+
+  /// No description provided for @welcomeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!'**
+  String get welcomeGreeting;
+
+  /// No description provided for @welcomeTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Forget goals, build your system.'**
+  String get welcomeTagline;
+
+  /// No description provided for @welcomeCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Let’s Set Up Your System'**
+  String get welcomeCta;
+
+  /// No description provided for @welcomeDuration.
+  ///
+  /// In en, this message translates to:
+  /// **'6 min'**
+  String get welcomeDuration;
 }
 
 class _AppLocalizationsDelegate

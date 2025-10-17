@@ -82,4 +82,22 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get done => 'Bitti';
+
+  @override
+  String get welcomeBrand => 'ATOMİK SPOR';
+
+  @override
+  String get welcomeWizard => 'Kurulum Sihirbazı';
+
+  @override
+  String get welcomeGreeting => 'Hoş geldiniz!';
+
+  @override
+  String get welcomeTagline => 'Hedefleri unut, sistem kur.';
+
+  @override
+  String get welcomeCta => 'Sistemini Kuralım';
+
+  @override
+  String get welcomeDuration => '6 dk';
 }

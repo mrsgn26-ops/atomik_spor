@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'habit_tracker_screen.dart';
 import 'settings_page.dart';
+import 'ui/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,30 +77,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.appTitle),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              key: const Key('showCalendarButton'),
-              onPressed: () => _openHabitTracker(context),
-              child: Text(localizations.btnStart),
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton(
-              key: const Key('changeLanguageButton'),
-              onPressed: () => _openSettings(context),
-              child: Text(localizations.btnChangeLang),
-            ),
-          ],
-        ),
-      ),
+    return WelcomeScreen(
+      onStartPressed: () => _openHabitTracker(context),
+      onChangeLanguage: () => _openSettings(context),
     );
   }
 }
