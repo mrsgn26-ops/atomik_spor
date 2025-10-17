@@ -188,6 +188,30 @@ abstract class AppLocalizations {
   /// **'Start today with 6 min'**
   String get sub6minStart;
 
+  /// No description provided for @setupWizardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup wizard'**
+  String get setupWizardTitle;
+
+  /// No description provided for @welcomeGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!'**
+  String get welcomeGreeting;
+
+  /// No description provided for @setupDurationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'6 min setup'**
+  String get setupDurationLabel;
+
+  /// No description provided for @setupButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up my system'**
+  String get setupButtonLabel;
+
   /// No description provided for @btnStart.
   ///
   /// In en, this message translates to:

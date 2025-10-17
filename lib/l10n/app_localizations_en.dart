@@ -56,6 +56,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sub6minStart => 'Start today with 6 min';
 
   @override
+  String get setupWizardTitle => 'Setup wizard';
+
+  @override
+  String get welcomeGreeting => 'Welcome!';
+
+  @override
+  String get setupDurationLabel => '6 min setup';
+
+  @override
+  String get setupButtonLabel => 'Set up my system';
+
+  @override
   String get btnStart => 'Start';
 
   @override

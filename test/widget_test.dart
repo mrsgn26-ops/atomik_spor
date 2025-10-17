@@ -8,7 +8,7 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    final buttonFinder = find.byKey(const Key('showCalendarButton'));
+    final buttonFinder = find.byKey(const Key('setupButton'));
     expect(buttonFinder, findsOneWidget);
 
     await tester.tap(buttonFinder);

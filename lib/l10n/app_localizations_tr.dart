@@ -57,6 +57,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get sub6minStart => 'Bugün 6 dk ile başla';
 
   @override
+  String get setupWizardTitle => 'Kurulum Sihirbazı';
+
+  @override
+  String get welcomeGreeting => 'Hoş geldiniz!';
+
+  @override
+  String get setupDurationLabel => '6 dk kurulum';
+
+  @override
+  String get setupButtonLabel => 'Sistemimi Kuralım';
+
+  @override
   String get btnStart => 'Başla';
 
   @override
