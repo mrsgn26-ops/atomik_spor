@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:atomik_spor/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'habit_tracker_screen.dart';
 import 'ui/welcome_screen.dart';
 
 void main() {
@@ -32,6 +33,13 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/giris1' || settings.name == '/') {
           return MaterialPageRoute<void>(
             builder: (_) => const WelcomeScreen(),
+            settings: settings,
+          );
+        }
+
+        if (settings.name == '/habitTracker') {
+          return MaterialPageRoute<void>(
+            builder: (_) => const HabitTrackerScreen(),
             settings: settings,
           );
         }

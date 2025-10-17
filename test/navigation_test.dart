@@ -1,3 +1,4 @@
+import 'package:atomik_spor/habit_tracker_screen.dart';
 import 'package:atomik_spor/main.dart';
 import 'package:atomik_spor/ui/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,5 +21,15 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(WelcomeScreen), findsWidgets);
+  });
+
+  testWidgets('welcome CTA navigates to habit tracker', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Sistemini Kuralım'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(HabitTrackerScreen), findsOneWidget);
   });
 }

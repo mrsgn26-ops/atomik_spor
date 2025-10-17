@@ -1,4 +1,3 @@
-import 'package:atomik_spor/habit_tracker_screen.dart';
 import 'package:atomik_spor/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -121,11 +120,7 @@ class _WelcomeCard extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (context) => const HabitTrackerScreen(),
-                      ),
-                    );
+                    Navigator.of(context).pushNamed('/habitTracker');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2EC173),
