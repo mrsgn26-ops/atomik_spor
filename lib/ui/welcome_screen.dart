@@ -120,8 +120,8 @@ class _WelcomeCard extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const HabitTrackerScreen(),
+                      MaterialPageRoute<void>(
+                        builder: (context) => const HabitTrackerScreen(),
                       ),
                     );
                   },
