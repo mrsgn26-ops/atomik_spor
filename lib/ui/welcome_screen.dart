@@ -7,12 +7,23 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: _WelcomeBackground(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-            child: _WelcomeCard(),
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final minHeight = math.max(0.0, constraints.maxHeight - 96);
+              return SingleChildScrollView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: minHeight),
+                  child: const Center(
+                    child: _WelcomeCard(),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -141,14 +152,18 @@ class _Illustration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 4 / 5,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          final width = constraints.maxWidth;
-          final femaleHeight = math.min(width * 0.95, 220.0);
-          final maleWidth = math.min(width * 0.88, 220.0);
-          return Stack(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        final illustrationHeight = math.min(width * 1.25, 340.0);
+        final femaleHeight = math.min(
+          math.min(width * 0.95, illustrationHeight * 0.9),
+          220.0,
+        );
+        final maleWidth = math.min(width * 0.88, 220.0);
+        return SizedBox(
+          height: illustrationHeight,
+          child: Stack(
             clipBehavior: Clip.none,
             children: [
               Align(
@@ -198,9 +213,9 @@ class _Illustration extends StatelessWidget {
                 ),
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
