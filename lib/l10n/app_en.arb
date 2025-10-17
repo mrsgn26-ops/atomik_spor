@@ -32,5 +32,11 @@
   "onboardingTitle1": "Systems, not goals",
   "onboardingTitle2": "Choose your trigger",
   "onboardingTitle3": "Pick a reminder time",
-  "done": "Done"
+  "done": "Done",
+  "welcomeBrand": "ATOMIK SPOR",
+  "welcomeWizard": "Setup wizard",
+  "welcomeGreeting": "Welcome!",
+  "welcomeTagline": "Forget goals, build your system.",
+  "welcomeCta": "Let’s Set Up Your System",
+  "welcomeDuration": "6 min"
 }
