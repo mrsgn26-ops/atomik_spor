@@ -29,26 +29,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       initialRoute: '/giris1',
-      onGenerateRoute: (settings) {
-        if (settings.name == '/giris1' || settings.name == '/') {
-          return MaterialPageRoute<void>(
-            builder: (_) => const WelcomeScreen(),
-            settings: settings,
-          );
-        }
-
-        if (settings.name == '/habitTracker') {
-          return MaterialPageRoute<void>(
-            builder: (_) => const HabitTrackerScreen(),
-            settings: settings,
-          );
-        }
-
-        return MaterialPageRoute<void>(
-          builder: (_) => const WelcomeScreen(),
-          settings: settings,
-        );
+      routes: {
+        '/': (context) => const WelcomeScreen(),
+        '/giris1': (context) => const WelcomeScreen(),
+        '/habitTracker': (context) => const HabitTrackerScreen(),
       },
+      onUnknownRoute: (settings) => MaterialPageRoute<void>(
+        builder: (_) => const WelcomeScreen(),
+        settings: settings,
+      ),
     );
   }
 }
