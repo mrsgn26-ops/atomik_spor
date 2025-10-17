@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import 'package:atomik_spor/habit_tracker_screen.dart';
+import 'package:atomik_spor/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -47,6 +47,8 @@ class _WelcomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 420),
@@ -68,7 +70,7 @@ class _WelcomeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'ATOMİK SPOR',
+                localizations.welcomeBrand,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
@@ -78,7 +80,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'KURULUM SİHİRBAZI',
+                localizations.welcomeWizard,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       letterSpacing: 6,
@@ -98,7 +100,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 36),
               Text(
-                'Hoş geldiniz!',
+                localizations.welcomeGreeting,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
@@ -107,7 +109,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                'Hedefleri unut, sistem kur.',
+                localizations.welcomeTagline,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontSize: 16,
@@ -135,7 +137,7 @@ class _WelcomeCard extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Sistemini Kuralım',
+                    localizations.welcomeCta,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
