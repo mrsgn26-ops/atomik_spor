@@ -62,6 +62,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get btnChangeLang => 'Change Language';
 
   @override
+  String get homeWelcomeIllustrationDescription =>
+      'Illustration of four people stretching together';
+
+  @override
   String get labelCurrentStreak => 'Current streak';
 
   @override

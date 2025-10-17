@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Change Language'**
   String get btnChangeLang;
 
+  /// No description provided for @homeWelcomeIllustrationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Illustration of four people stretching together'**
+  String get homeWelcomeIllustrationDescription;
+
   /// No description provided for @labelCurrentStreak.
   ///
   /// In en, this message translates to:
