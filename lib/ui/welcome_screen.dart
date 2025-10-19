@@ -6,9 +6,6 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    final theme = Theme.of(context);
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -20,8 +17,13 @@ class WelcomeScreen extends StatelessWidget {
             colors: [Color(0xFFF5FAFF), Color(0xFFFFFFFF)],
           ),
         ),
+        child: const Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+            child: _WelcomeCard(),
+          ),
+        ),
       ),
-      child: child,
     );
   }
 }
@@ -31,7 +33,7 @@ class _WelcomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
     return LayoutBuilder(
@@ -40,10 +42,6 @@ class _WelcomeCard extends StatelessWidget {
         final textAlign = isWide ? TextAlign.left : TextAlign.center;
         final crossAxisAlignment =
             isWide ? CrossAxisAlignment.start : CrossAxisAlignment.center;
-
-        final cardPadding = isWide
-            ? const EdgeInsets.symmetric(horizontal: 48, vertical: 56)
-            : const EdgeInsets.symmetric(horizontal: 32, vertical: 40);
 
         Widget buildBadge() {
           return Align(
@@ -64,7 +62,7 @@ class _WelcomeCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    localizations.welcomeWizard.toUpperCase(),
+                    l10n.welcomeWizard.toUpperCase(),
                     style: theme.textTheme.labelSmall?.copyWith(
                       fontWeight: FontWeight.w700,
                       letterSpacing: 1.6,
@@ -77,6 +75,31 @@ class _WelcomeCard extends StatelessWidget {
           );
         }
 
+        Widget buildHighlights() {
+          final items = [
+            _HighlightItem(
+              icon: Icons.auto_graph_rounded,
+              label: 'Atomic habits in action',
+            ),
+            _HighlightItem(
+              icon: Icons.bolt_rounded,
+              label: 'Quick, focused setup',
+            ),
+            _HighlightItem(
+              icon: Icons.task_alt_rounded,
+              label: 'Track progress daily',
+            ),
+          ];
+
+          return Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            alignment:
+                isWide ? WrapAlignment.start : WrapAlignment.center,
+            children: items,
+          );
+        }
+
         Widget buildTextColumn() {
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -85,7 +108,7 @@ class _WelcomeCard extends StatelessWidget {
               buildBadge(),
               const SizedBox(height: 24),
               Text(
-                localizations.welcomeBrand,
+                l10n.welcomeBrand,
                 textAlign: textAlign,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w800,
@@ -96,7 +119,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                localizations.welcomeGreeting,
+                l10n.welcomeGreeting,
                 textAlign: textAlign,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
@@ -105,7 +128,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 28),
               Text(
-                localizations.welcomeTagline,
+                l10n.welcomeTagline,
                 textAlign: textAlign,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontSize: 18,
@@ -115,8 +138,7 @@ class _WelcomeCard extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
                   color: const Color(0x0F132442),
                   borderRadius: BorderRadius.circular(18),
@@ -125,54 +147,35 @@ class _WelcomeCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildBadge(),
-                    const SizedBox(height: 24),
-                    Text(
-                      l10n.welcomeBrand,
-                      textAlign: isWide ? TextAlign.left : TextAlign.center,
-                      style: theme.textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 32,
-                            letterSpacing: 1.5,
-                            color: const Color(0xFF132442),
-                          ),
+                    const Icon(
+                      Icons.schedule_rounded,
+                      size: 18,
+                      color: Color(0xFF132442),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(width: 8),
                     Text(
-                      localizations.welcomeDuration,
+                      l10n.welcomeDuration,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0.5,
                         color: const Color(0xFF132442),
                       ),
                     ),
-                    const SizedBox(height: 28),
-                    Text(
-                      l10n.welcomeTagline,
-                      textAlign: isWide ? TextAlign.left : TextAlign.center,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                            fontSize: 18,
-                            height: 1.5,
-                            color: const Color(0xFF52607A),
-                          ),
-                    ),
-                    const SizedBox(height: 24),
-                    buildHighlights(),
-                    const SizedBox(height: 32),
-                    buildCtaButton(),
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
+              buildHighlights(),
               const SizedBox(height: 32),
               SizedBox(
-                width: double.infinity,
+                width: isWide ? null : double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
                     Navigator.of(context).pushNamed('/habitTracker');
                   },
                   icon: const Icon(Icons.arrow_forward_rounded),
                   label: Text(
-                    localizations.welcomeCta,
+                    l10n.welcomeCta,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
@@ -237,7 +240,9 @@ class _WelcomeCard extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: cardPadding,
+                padding: isWide
+                    ? const EdgeInsets.symmetric(horizontal: 48, vertical: 56)
+                    : const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
                 child: isWide
                     ? Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -259,7 +264,48 @@ class _WelcomeCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        );
+      },
+    );
+  }
+}
+
+class _HighlightItem extends StatelessWidget {
+  const _HighlightItem({
+    required this.icon,
+    required this.label,
+  });
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0x0F132442),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            size: 18,
+            color: theme.colorScheme.primary,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF132442),
+            ),
+          ),
+        ],
       ),
     );
   }
