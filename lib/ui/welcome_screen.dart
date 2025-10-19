@@ -50,110 +50,158 @@ class _WelcomeCard extends StatelessWidget {
 
     final theme = Theme.of(context);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isWide = constraints.maxWidth > 720;
-        final cardPadding = isWide
-            ? const EdgeInsets.symmetric(horizontal: 48, vertical: 56)
-            : const EdgeInsets.symmetric(horizontal: 32, vertical: 44);
-
-        final headlineStyle = theme.textTheme.headlineSmall?.copyWith(
-          fontWeight: FontWeight.w800,
-          fontSize: isWide ? 34 : 28,
-          color: const Color(0xFF14213D),
-          letterSpacing: 1.2,
-        );
-
-        final subtitleStyle = theme.textTheme.labelLarge?.copyWith(
-          fontWeight: FontWeight.w600,
-          fontSize: isWide ? 18 : 16,
-          letterSpacing: 5,
-          color: const Color(0xFF5D6A85),
-        );
-
-        final bodyStyle = theme.textTheme.bodyLarge?.copyWith(
-          fontSize: isWide ? 18 : 16,
-          height: 1.5,
-          color: const Color(0xFF6B738C),
-        );
-
-        Widget buildTextColumn() {
-          return Column(
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 460),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 44),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x143062C8),
+                blurRadius: 45,
+                offset: Offset(0, 28),
+              ),
+            ],
+          ),
+          child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0x112EC173),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.auto_fix_high_rounded,
+                        size: 18,
+                        color: Color(0xFF2EC173),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        localizations.welcomeWizard.toUpperCase(),
+                        style: theme.textTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1.6,
+                              color: const Color(0xFF2EC173),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
               Text(
                 localizations.welcomeBrand,
-                style: headlineStyle,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 32,
+                      letterSpacing: 1.5,
+                      color: const Color(0xFF132442),
+                    ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Text(
-                localizations.welcomeWizard.toUpperCase(),
-                style: subtitleStyle,
+                localizations.welcomeGreeting,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF3B4D68),
+                    ),
+              ),
+              const SizedBox(height: 28),
+              AspectRatio(
+                aspectRatio: 3 / 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0xFFEFF7FF), Color(0xFFFFFFFF)],
+                      ),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Image.asset('assets/images/giris1.jpg'),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 28),
+              Text(
+                localizations.welcomeTagline,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(
+                      fontSize: 18,
+                      height: 1.5,
+                      color: const Color(0xFF52607A),
+                    ),
               ),
               const SizedBox(height: 24),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 8,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE6F8EF),
-                  borderRadius: BorderRadius.circular(16),
+                  color: const Color(0x0F132442),
+                  borderRadius: BorderRadius.circular(18),
                 ),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 42,
-                      height: 42,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2EC173),
-                        shape: BoxShape.circle,
-                      ),
-                      alignment: Alignment.center,
-                      child: const Icon(
-                        Icons.bolt_rounded,
-                        color: Colors.white,
-                      ),
+                    const Icon(
+                      Icons.timer_outlined,
+                      size: 20,
+                      color: Color(0xFF132442),
                     ),
-                    const SizedBox(width: 16),
-                    Flexible(
-                      child: Text(
-                        localizations.welcomeGreeting,
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          fontSize: isWide ? 26 : 22,
-                          color: const Color(0xFF1F2A44),
-                        ),
-                      ),
+                    const SizedBox(width: 8),
+                    Text(
+                      localizations.welcomeDuration,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
+                            color: const Color(0xFF132442),
+                          ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              Text(
-                localizations.welcomeTagline,
-                style: bodyStyle,
-              ),
               const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/habitTracker');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2EC173),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 18,
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/habitTracker');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2EC173),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  textStyle: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
+                  child: Text(
+                    localizations.welcomeCta,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.2,
+                          color: Colors.white,
+                        ),
                   ),
                   elevation: 0,
                 ),
