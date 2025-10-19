@@ -6,34 +6,19 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _WelcomeBackground(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 48),
-            child: _WelcomeCard(),
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [Color(0xFFF5FAFF), Color(0xFFFFFFFF)],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _WelcomeBackground extends StatelessWidget {
-  const _WelcomeBackground({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [Color(0xFFF5FAFF), Color(0xFFFFFFFF)],
         ),
       ),
       child: child,
@@ -140,12 +125,19 @@ class _WelcomeCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.timer_outlined,
-                      size: 20,
-                      color: Color(0xFF132442),
+                    buildBadge(),
+                    const SizedBox(height: 24),
+                    Text(
+                      l10n.welcomeBrand,
+                      textAlign: isWide ? TextAlign.left : TextAlign.center,
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 32,
+                            letterSpacing: 1.5,
+                            color: const Color(0xFF132442),
+                          ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(height: 12),
                     Text(
                       localizations.welcomeDuration,
                       style: theme.textTheme.bodyMedium?.copyWith(
@@ -154,6 +146,20 @@ class _WelcomeCard extends StatelessWidget {
                         color: const Color(0xFF132442),
                       ),
                     ),
+                    const SizedBox(height: 28),
+                    Text(
+                      l10n.welcomeTagline,
+                      textAlign: isWide ? TextAlign.left : TextAlign.center,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                            fontSize: 18,
+                            height: 1.5,
+                            color: const Color(0xFF52607A),
+                          ),
+                    ),
+                    const SizedBox(height: 24),
+                    buildHighlights(),
+                    const SizedBox(height: 32),
+                    buildCtaButton(),
                   ],
                 ),
               ),
@@ -253,8 +259,8 @@ class _WelcomeCard extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
