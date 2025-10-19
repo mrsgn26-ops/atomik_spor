@@ -48,102 +48,194 @@ class _WelcomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 420),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(32),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x143062C8),
-                blurRadius: 45,
-                offset: Offset(0, 28),
-              ),
-            ],
-          ),
-          child: Column(
+    final theme = Theme.of(context);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isWide = constraints.maxWidth > 720;
+        final cardPadding = isWide
+            ? const EdgeInsets.symmetric(horizontal: 48, vertical: 56)
+            : const EdgeInsets.symmetric(horizontal: 32, vertical: 44);
+
+        final headlineStyle = theme.textTheme.headlineSmall?.copyWith(
+          fontWeight: FontWeight.w800,
+          fontSize: isWide ? 34 : 28,
+          color: const Color(0xFF14213D),
+          letterSpacing: 1.2,
+        );
+
+        final subtitleStyle = theme.textTheme.labelLarge?.copyWith(
+          fontWeight: FontWeight.w600,
+          fontSize: isWide ? 18 : 16,
+          letterSpacing: 5,
+          color: const Color(0xFF5D6A85),
+        );
+
+        final bodyStyle = theme.textTheme.bodyLarge?.copyWith(
+          fontSize: isWide ? 18 : 16,
+          height: 1.5,
+          color: const Color(0xFF6B738C),
+        );
+
+        Widget buildTextColumn() {
+          return Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 localizations.welcomeBrand,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: const Color(0xFF182A49),
-                      letterSpacing: 4,
-                    ),
+                style: headlineStyle,
               ),
               const SizedBox(height: 8),
               Text(
-                localizations.welcomeWizard,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 6,
-                      color: const Color(0xFF5B6B81),
-                    ),
+                localizations.welcomeWizard.toUpperCase(),
+                style: subtitleStyle,
               ),
-              const SizedBox(height: 28),
-              AspectRatio(
-                aspectRatio: 4 / 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(28),
-                  child: Image.asset(
-                    'assets/images/giris1.jpg',
-                    fit: BoxFit.cover,
-                  ),
+              const SizedBox(height: 24),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE6F8EF),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 42,
+                      height: 42,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF2EC173),
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: const Icon(
+                        Icons.bolt_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Flexible(
+                      child: Text(
+                        localizations.welcomeGreeting,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          fontSize: isWide ? 26 : 22,
+                          color: const Color(0xFF1F2A44),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 36),
-              Text(
-                localizations.welcomeGreeting,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: const Color(0xFF182A49),
-                    ),
-              ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 20),
               Text(
                 localizations.welcomeTagline,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontSize: 16,
-                      color: const Color(0xFF6E7A93),
-                    ),
+                style: bodyStyle,
               ),
-              const SizedBox(height: 40),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/habitTracker');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2EC173),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 18),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
+              const SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/habitTracker');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2EC173),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 28,
+                    vertical: 18,
                   ),
-                  child: Text(
-                    localizations.welcomeCta,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                        ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
                   ),
+                  textStyle: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5,
+                  ),
+                  elevation: 0,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(localizations.welcomeCta),
+                    const SizedBox(width: 12),
+                    const Icon(Icons.arrow_forward_rounded),
+                  ],
                 ),
               ),
             ],
+          );
+        }
+
+        Widget buildImage() {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(28),
+            child: AspectRatio(
+              aspectRatio: isWide ? 4 / 3 : 3 / 4,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.4),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                  child: Image.asset('assets/images/giris1.jpg'),
+                ),
+              ),
+            ),
+          );
+        }
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: isWide ? 980 : 520),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(36),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x123062C8),
+                    blurRadius: 60,
+                    offset: Offset(0, 32),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: cardPadding,
+                child: isWide
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(flex: 3, child: buildTextColumn()),
+                          const SizedBox(width: 40),
+                          Expanded(flex: 4, child: buildImage()),
+                        ],
+                      )
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          buildImage(),
+                          const SizedBox(height: 32),
+                          buildTextColumn(),
+                        ],
+                      ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
