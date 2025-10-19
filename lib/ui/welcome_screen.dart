@@ -48,11 +48,13 @@ class _WelcomeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
+    final theme = Theme.of(context);
+
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 420),
+        constraints: const BoxConstraints(maxWidth: 460),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 44),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(32),
@@ -66,56 +68,117 @@ class _WelcomeCard extends StatelessWidget {
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                localizations.welcomeBrand,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: const Color(0xFF182A49),
-                      letterSpacing: 4,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                localizations.welcomeWizard,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 6,
-                      color: const Color(0xFF5B6B81),
-                    ),
-              ),
-              const SizedBox(height: 28),
-              AspectRatio(
-                aspectRatio: 4 / 3,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(28),
-                  child: Image.asset(
-                    'assets/images/giris1.jpg',
-                    fit: BoxFit.cover,
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: const Color(0x112EC173),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.auto_fix_high_rounded,
+                        size: 18,
+                        color: Color(0xFF2EC173),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        localizations.welcomeWizard.toUpperCase(),
+                        style: theme.textTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1.6,
+                              color: const Color(0xFF2EC173),
+                            ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 36),
+              const SizedBox(height: 24),
               Text(
-                localizations.welcomeGreeting,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                      color: const Color(0xFF182A49),
+                localizations.welcomeBrand,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 32,
+                      letterSpacing: 1.5,
+                      color: const Color(0xFF132442),
                     ),
               ),
               const SizedBox(height: 12),
               Text(
-                localizations.welcomeTagline,
+                localizations.welcomeGreeting,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontSize: 16,
-                      color: const Color(0xFF6E7A93),
+                style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF3B4D68),
                     ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 28),
+              AspectRatio(
+                aspectRatio: 3 / 2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: DecoratedBox(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0xFFEFF7FF), Color(0xFFFFFFFF)],
+                      ),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Image.asset('assets/images/giris1.jpg'),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 28),
+              Text(
+                localizations.welcomeTagline,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.copyWith(
+                      fontSize: 18,
+                      height: 1.5,
+                      color: const Color(0xFF52607A),
+                    ),
+              ),
+              const SizedBox(height: 24),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: const Color(0x0F132442),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.timer_outlined,
+                      size: 20,
+                      color: Color(0xFF132442),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      localizations.welcomeDuration,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.5,
+                            color: const Color(0xFF132442),
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -133,8 +196,10 @@ class _WelcomeCard extends StatelessWidget {
                   ),
                   child: Text(
                     localizations.welcomeCta,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
+                          letterSpacing: 0.2,
                           color: Colors.white,
                         ),
                   ),
