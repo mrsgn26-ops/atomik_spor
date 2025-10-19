@@ -31,113 +31,289 @@
 
   <title>atomik_spor</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
       color-scheme: light;
+      --surface: #ffffff;
+      --text-primary: #0f1a33;
+      --text-secondary: #4a5c80;
+      --accent: #2ddaa0;
+      --accent-strong: #1fb378;
+      --card-shadow: 0 28px 60px rgba(20, 51, 112, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(180deg, #f7fbff 0%, #f1f7ff 100%);
+      font-family: "Manrope", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #f7fbff 0%, #dfe9ff 40%, #d2e2ff 100%);
       min-height: 100vh;
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: flex-start;
+      padding: clamp(24px, 6vw, 72px);
+      color: var(--text-primary);
+      line-height: 1.55;
     }
 
     body.app-loaded {
       background: #ffffff;
       min-height: auto;
       display: block;
-      align-items: stretch;
+      padding: 0;
     }
 
     #initial-hero {
-      width: min(100%, 800px);
-      padding: 32px 16px 24px;
-      box-sizing: border-box;
+      width: min(1040px, 100%);
+      display: flex;
+      justify-content: center;
     }
 
-    #initial-hero picture {
+    .hero-card {
+      background: var(--surface);
+      border-radius: clamp(24px, 3vw, 40px);
+      box-shadow: var(--card-shadow);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-image {
+      position: relative;
+      background: linear-gradient(180deg, rgba(45, 218, 160, 0.12), rgba(31, 179, 120, 0.06));
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 32px 32px auto auto;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      border: 6px solid rgba(31, 179, 120, 0.2);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(45, 218, 160, 0.15), transparent 65%),
+        #ffffff;
+      box-shadow: 0 18px 36px rgba(22, 94, 71, 0.12);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-image picture,
+    .hero-image img {
       display: block;
       width: 100%;
+      height: 100%;
     }
 
-    #initial-hero img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 32px;
-      box-shadow: 0 24px 48px rgba(34, 71, 134, 0.14);
-      background: #fff;
+    .hero-image picture {
+      height: 100%;
     }
 
-    #initial-hero .hero-copy {
-      margin-top: 24px;
-      text-align: center;
-      color: #0f274a;
+    .hero-image img {
+      object-fit: cover;
     }
 
-    #initial-hero .hero-copy h1 {
+    .hero-copy {
+      padding: clamp(32px, 5vw, 64px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(16px, 3vw, 28px);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-strong);
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: "";
+      flex: 1 1 auto;
+      max-width: 36px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(31, 179, 120, 0.6));
+    }
+
+    .hero-copy h1 {
       margin: 0;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      letter-spacing: 0.02em;
+      font-size: clamp(2.15rem, 5vw, 3rem);
+      line-height: 1.18;
       font-weight: 700;
+      letter-spacing: -0.015em;
     }
 
-    #initial-hero .hero-copy p {
-      margin: 8px 0 0;
-    }
-
-    #initial-hero .hero-copy .hero-subtitle {
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-      color: #32557b;
+    .hero-copy .hero-subtitle {
+      font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+      color: var(--text-secondary);
       font-weight: 500;
     }
 
-    #initial-hero .hero-copy .hero-note {
-      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: #4f6b94;
-      font-weight: 400;
+    .hero-copy .hero-note {
+      margin: 0;
+      color: rgba(15, 26, 51, 0.72);
+      font-size: clamp(1rem, 2vw, 1.2rem);
     }
 
-    #initial-hero .hero-copy .hero-cta {
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-badge {
       display: inline-flex;
-      margin-top: 20px;
-      padding: 14px 32px;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #2ddaa0, #1fb378);
-      color: #0b1f3b;
+      background: rgba(45, 218, 160, 0.12);
+      color: var(--accent-strong);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 16px 36px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #05211b;
       text-decoration: none;
       font-weight: 600;
       font-size: 1.05rem;
-      box-shadow: 0 12px 24px rgba(33, 173, 120, 0.35);
+      box-shadow: 0 18px 36px rgba(33, 173, 120, 0.36);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    #initial-hero .hero-copy .hero-cta:focus,
-    #initial-hero .hero-copy .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(33, 173, 120, 0.45);
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .hero-cta:focus,
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 40px rgba(33, 173, 120, 0.44);
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(15, 26, 51, 0.65);
+    }
+
+    .hero-meta strong {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 900px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 320px;
+      }
+
+      .hero-image::after {
+        inset: 24px auto auto 24px;
+        width: 72px;
+        height: 72px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: clamp(16px, 8vw, 32px);
+      }
+
+      .hero-copy {
+        padding: clamp(24px, 8vw, 40px);
+      }
+
+      .hero-eyebrow {
+        letter-spacing: 0.12em;
+        justify-content: center;
+      }
+
+      .hero-eyebrow::before,
+      .hero-eyebrow::after {
+        display: none;
+      }
+
+      .hero-copy {
+        text-align: center;
+        align-items: center;
+      }
+
+      .hero-badges {
+        justify-content: center;
+      }
+
+      .hero-cta {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
   <div id="initial-hero">
-    <picture>
-      <source type="image/webp" srcset="/assets/splash-768.webp 1x, /assets/splash-1536.webp 2x">
-      <img src="/assets/splash-768.webp"
-           srcset="/assets/splash-768.webp 1x, /assets/splash-1536.webp 2x"
-           width="768" height="1152" alt="Kurulum ekranı"
-           loading="eager" fetchpriority="high" decoding="async">
-    </picture>
-    <div class="hero-copy" lang="tr">
-      <h1>Atomik Spor Kurulum Sihirbazı</h1>
-      <p class="hero-subtitle">Hoş geldiniz! Sistem kurulumunu dakikalar içinde tamamlayın.</p>
-      <p class="hero-note">Kurulum ortalama 6 dakika sürer. Hazırsanız başlayalım.</p>
-      <a class="hero-cta" href="#app-anchor">Sistemini Kuralım</a>
+    <div class="hero-card" lang="tr">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">Atomik Spor</span>
+        <h1>Kurulum sihirbazınızla tanışın.</h1>
+        <p class="hero-subtitle">Profesyonel spor yönetim sisteminizi dakikalar içinde ayağa kaldırın. Başlangıç ayarları boyunca size adım adım eşlik ediyoruz.</p>
+        <div class="hero-badges">
+          <span class="hero-badge">⏱ Ortalama 6 dakikada hazır</span>
+          <span class="hero-badge">🛠 Adım adım rehberlik</span>
+        </div>
+        <p class="hero-note">Hedeflerinizi, üyelerinizi ve antrenman akışınızı bir araya getirecek güçlü araçları kullanmaya hazır olun.</p>
+        <a class="hero-cta" href="#app-anchor">
+          Sistemi Kuralım
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.293 5.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L16.586 13H6a1 1 0 1 1 0-2h10.586l-4.293-4.293a1 1 0 0 1 0-1.414Z" />
+          </svg>
+        </a>
+        <div class="hero-meta">
+          <div><strong>Akıllı öneriler:</strong> Giriş verilerinize göre hazır planlar oluşturulur.</div>
+          <div><strong>Takım uyumu:</strong> Tüm eğitmen ve üyeler tek panelde buluşur.</div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <picture>
+          <source type="image/webp" srcset="/assets/splash-768.webp 1x, /assets/splash-1536.webp 2x">
+          <img src="/assets/splash-768.webp"
+               srcset="/assets/splash-768.webp 1x, /assets/splash-1536.webp 2x"
+               width="768" height="1152" alt="Atomik Spor kurulum ekranı"
+               loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+      </div>
     </div>
   </div>
   <div id="app-anchor" hidden></div>
