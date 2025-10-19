@@ -203,12 +203,87 @@ class _WelcomeCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                   ),
+                  elevation: 0,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(localizations.welcomeCta),
+                    const SizedBox(width: 12),
+                    const Icon(Icons.arrow_forward_rounded),
+                  ],
                 ),
               ),
             ],
+          );
+        }
+
+        Widget buildImage() {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(28),
+            child: AspectRatio(
+              aspectRatio: isWide ? 4 / 3 : 3 / 4,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.4),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                  child: Image.asset('assets/images/giris1.jpg'),
+                ),
+              ),
+            ),
+          );
+        }
+
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: isWide ? 980 : 520),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(36),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x123062C8),
+                    blurRadius: 60,
+                    offset: Offset(0, 32),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: cardPadding,
+                child: isWide
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(flex: 3, child: buildTextColumn()),
+                          const SizedBox(width: 40),
+                          Expanded(flex: 4, child: buildImage()),
+                        ],
+                      )
+                    : Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          buildImage(),
+                          const SizedBox(height: 32),
+                          buildTextColumn(),
+                        ],
+                      ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
