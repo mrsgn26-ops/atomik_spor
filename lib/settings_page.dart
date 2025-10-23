@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:atomik_spor/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key, required this.onLocaleChanged});
@@ -8,13 +8,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final hasTr =
         AppLocalizations.supportedLocales.contains(const Locale('tr'));
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.navSettings),
+        title: Text(l10n.navSettings),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              localizations.btnChangeLang,
+              l10n.btnChangeLang,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
@@ -49,7 +49,7 @@ class SettingsPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(localizations.done),
+                  child: Text(l10n.done),
                 ),
               ],
             ),

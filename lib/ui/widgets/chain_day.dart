@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:atomik_spor/domain/streak.dart';
 
@@ -8,6 +9,8 @@ class ChainDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    final l10n = AppLocalizations.of(context)!;
     return CustomPaint(
       painter: _ChainPainter(v),
       child: Center(
