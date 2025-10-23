@@ -170,6 +170,7 @@ class _WelcomeCard extends StatelessWidget {
               SizedBox(
                 width: isWide ? null : double.infinity,
                 child: ElevatedButton.icon(
+                  key: const Key('showCalendarButton'),
                   onPressed: () {
                     Navigator.of(context).pushNamed('/habitTracker');
                   },

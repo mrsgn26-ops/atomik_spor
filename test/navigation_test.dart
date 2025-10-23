@@ -27,7 +27,7 @@ void main() {
     await tester.pumpWidget(const MyApp());
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Sistemini Kuralım'));
+    await tester.tap(find.byKey(const Key('showCalendarButton')));
     await tester.pumpAndSettle();
 
     expect(find.byType(HabitTrackerScreen), findsOneWidget);
