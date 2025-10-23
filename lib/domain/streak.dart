@@ -1,4 +1,4 @@
-import 'datex.dart';
+import 'package:atomik_spor/domain/datex.dart';
 
 class StreakCounts {
   final int currentGrace;
