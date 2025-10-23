@@ -1,6 +1,4 @@
-# Generated localization files are written into lib/l10n so they can be
-# imported directly without the deprecated synthetic package wrapper.
 arb-dir: lib/l10n
 template-arb-file: app_en.arb
-output-localization-file: app_localizations.dart
 output-class: AppLocalizations
+synthetic-package: true

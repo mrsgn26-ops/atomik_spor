@@ -28,17 +28,17 @@ class ChainDay extends StatelessWidget {
               color: v.inMonth ? Colors.green.shade700 : Colors.grey.shade400,
               width: 2,
             ),
+            child: v.isToday
+                ? Container(
+                    // bugünü ince bir halka ile vurgula
+                    margin: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.orange, width: 2),
+                    ),
+                  )
+                : null,
           ),
-          child: v.isToday
-              ? Container(
-                  // bugünü ince bir halka ile vurgula
-                  margin: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.orange, width: 2),
-                  ),
-                )
-              : null,
         ),
       ),
     );
