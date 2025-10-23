@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'package:atomik_spor/l10n/app_localizations.dart';
 import 'package:atomik_spor/ui/widgets/chain_day.dart';
 
 import 'package:atomik_spor/data/session_repo.dart';
@@ -66,14 +66,14 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     });
   }
 
-  String _habitLabel(String habitId, AppLocalizations localizations) {
+  String _habitLabel(String habitId, AppLocalizations l10n) {
     switch (habitId) {
       case 'morningStretch':
-        return localizations.habitMorningStretch;
+        return l10n.habitMorningStretch;
       case 'reading':
-        return localizations.habitReading;
+        return l10n.habitReading;
       case 'hydrate':
-        return localizations.habitHydrate;
+        return l10n.habitHydrate;
     }
     return habitId;
   }
@@ -81,7 +81,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
   @override
   Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final calendarLocale = switch (locale.languageCode) {
       'tr' => 'tr_TR',
       'en' => 'en_US',
@@ -97,11 +97,11 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     final int completedCount = completedForDay.length;
     final int totalHabits = _habitIds.length;
     final String? formattedDate = selectedDay != null
-        ? DateFormat.yMMMMd(localizations.localeName).format(selectedDay)
+        ? DateFormat.yMMMMd(l10n.localeName).format(selectedDay)
         : null;
     final String listTitle = formattedDate != null
-        ? '${localizations.habitListTitle} · $formattedDate'
-        : localizations.habitListTitle;
+        ? '${l10n.habitListTitle} · $formattedDate'
+        : l10n.habitListTitle;
 
     final month = DateTime(_focusedDay.year, _focusedDay.month);
     final firstDayOfMonth = DateTime(month.year, month.month, 1);
@@ -132,7 +132,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.habitTrackerTitle),
+        title: Text(l10n.habitTrackerTitle),
       ),
       body: Column(
         children: [
@@ -188,7 +188,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  localizations.habitCompletionSummary(
+                  l10n.habitCompletionSummary(
                     completedCount,
                     totalHabits,
                   ),
@@ -196,7 +196,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  localizations.habitInstructions,
+                  l10n.habitInstructions,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -214,7 +214,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                   value: isCompleted,
                   onChanged: (value) =>
                       _toggleHabit(habitId, value ?? !isCompleted),
-                  title: Text(_habitLabel(habitId, localizations)),
+                  title: Text(_habitLabel(habitId, l10n)),
                 );
               },
             ),
