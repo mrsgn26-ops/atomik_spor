@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:atomik_spor/l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../logic/streak_service.dart';
 
@@ -11,7 +11,7 @@ class ChainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context)!;
     final counts = service.getCounts(today);
 
     return Card(
@@ -22,15 +22,15 @@ class ChainCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _Tile(
-              label: localizations.labelCurrentStreak,
+              label: l10n.labelCurrentStreak,
               value: counts.currentGrace.toString(),
             ),
             _Tile(
-              label: localizations.labelBestStreak,
+              label: l10n.labelBestStreak,
               value: counts.bestGrace.toString(),
             ),
             _Tile(
-              label: localizations.labelPerfectStreak,
+              label: l10n.labelPerfectStreak,
               value: counts.currentPerfect.toString(),
             ),
           ],
