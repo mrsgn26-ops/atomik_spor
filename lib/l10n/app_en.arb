@@ -29,6 +29,8 @@
   "labelCurrentStreak": "Current streak",
   "labelBestStreak": "Best streak",
   "labelPerfectStreak": "Perfect streak",
+  "chainDayCompleted": "Completed",
+  "chainDayNotCompleted": "Not completed",
   "onboardingTitle1": "Systems, not goals",
   "onboardingTitle2": "Choose your trigger",
   "onboardingTitle3": "Pick a reminder time",

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'package:atomik_spor/domain/streak.dart';
 
@@ -8,34 +10,42 @@ class ChainDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _ChainPainter(v),
-      child: Center(
-        child: Container(
-          width: 28,
-          height: 28,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: v.done
-                ? (v.inMonth
-                    ? Colors.green.shade600
-                    : Colors.green.shade300)
-                : Colors.transparent,
-            border: Border.all(
-              color: v.inMonth ? Colors.green.shade700 : Colors.grey.shade400,
-              width: 2,
+    final l10n = AppLocalizations.of(context)!;
+    final dateLabel = DateFormat.yMMMMEEEEd(l10n.localeName).format(v.day);
+    final statusLabel = v.done ? l10n.chainDayCompleted : l10n.chainDayNotCompleted;
+
+    return Semantics(
+      label: '$dateLabel · $statusLabel',
+      selected: v.done,
+      child: CustomPaint(
+        painter: _ChainPainter(v),
+        child: Center(
+          child: Container(
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: v.done
+                  ? (v.inMonth
+                      ? Colors.green.shade600
+                      : Colors.green.shade300)
+                  : Colors.transparent,
+              border: Border.all(
+                color: v.inMonth ? Colors.green.shade700 : Colors.grey.shade400,
+                width: 2,
+              ),
             ),
+            child: v.isToday
+                ? Container(
+                    // bugünü ince bir halka ile vurgula
+                    margin: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.orange, width: 2),
+                    ),
+                  )
+                : null,
           ),
-          child: v.isToday
-              ? Container(
-                  // bugünü ince bir halka ile vurgula
-                  margin: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.orange, width: 2),
-                  ),
-                )
-              : null,
         ),
       ),
     );
